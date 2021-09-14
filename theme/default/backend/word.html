@@ -1,0 +1,13 @@
+<form method='POST' action='{"?page&action=replace"|set_query}' enctype="multipart/form-data">	
+	<table class='table table-bordered'>
+		<tr>
+			<td>Слово</td>
+			<td><input type='text' class='form-control' name='callback[from]' value='{$word.from}' required /></td>
+		</tr>	
+		<tr>
+			<td>Перевод</td>
+			<td><input type='text' class='form-control' name='callback[to]' value='{$word.to}' required /></td>
+		</tr>	
+	</table>
+	<button type="submit" class="btn btn-primary">Save changes</button>			
+  </form>

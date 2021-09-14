@@ -1,0 +1,17 @@
+<h3>Перевод <a class='btn-sm btn-success' data-toggle="modal" data-target="#main_modal" href='{"action=replace"|set_query}'>+</a></h3>
+
+{if $words.data}
+	<table class='table table-bordered table-stripted'>
+		{foreach $words.data as $word}
+			<tr>
+				<td>{$word.from}</td>
+				<td>{$word.to}</td>
+				<td><a href='{"?page&action=replace&from=`$word.from`"|set_query}'><span class='glyphicon glyphicon-pencil text-info'></span></a></td>
+				<td><a href='{"?page&action=delete&from=`$word.from`"|set_query}'><span class='glyphicon glyphicon-remove text-danger'></span></a></td>
+			</tr>
+		{/foreach}
+	</table>		
+	{include file='pagination.html' count=$words.count}	
+{else}
+	<p class='text-center'>нет данных для отображения</p>
+{/if}

@@ -1,0 +1,24 @@
+<div id='faq'>
+	{if $user.login == 'admin' || $user.permissions.help.applications.backend['save']}
+			{literal}<script>$(function() {	$('.wysiwyg textarea').wysiwyg(); })</script>{/literal}
+			<form method='POST' action='{"?app=help&page=backend&action=save&callback[app]=`$content.app`&callback[page]=`$content.page`&callback[action]=`$content.action`"|set_query}'>
+				<div class="wysiwyg">
+					<textarea name="callback[text]">
+	{/if}
+	
+	{$content.text}
+	
+	{if $user.login == 'admin' || $user.permissions.help.applications.backend['save']}
+				</textarea>
+			</div>
+			<br clear='all' />
+			<input class='btn btn-success' type='submit' value='Сохранить' />
+		</form>
+	{/if}
+	
+	<br clear='all'/>
+	<br clear='all'/>
+	<a href='{"?app=`$content.app`&page=`$content.page`&action=`$content.action`"|set_query}'>Ссылка на раздел...</a>
+</div>
+
+
