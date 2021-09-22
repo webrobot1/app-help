@@ -3,7 +3,7 @@ namespace Edisom\App\help\model;
 
 class BackendModel extends \Edisom\Core\Model 
 {	
-	private $words = array();
+	private static $words = array();
 	
 	public function faq(int $id = null, array $callback = null)
 	{
@@ -16,15 +16,15 @@ class BackendModel extends \Edisom\Core\Model
 		return @($id?$data[0]:$data[0]['text']);
 	}	
 			
-	function translate(string $word){
+	static function translate(string $word){
 		$word = strtolower($word);
-		if(!array_key_exists($word, $this->words))
-			if(!$this->words[$word] = @$this->query('SELECT `to` FROM translate WHERE `from`="'.$word.'"')[0]['to'])
-				$this->words[$word] = $word;
+		if(!array_key_exists($word, static::$words))
+			if(!static::$words[$word] = @static::query('SELECT `to` FROM translate WHERE `from`="'.$word.'"')[0]['to'])
+				static::$words[$word] = $word;
 			else
-				$this->words[$word] = mb_strtoupper(mb_substr($this->words[$word], 0, 1)).mb_substr($this->words[$word],1);
+				static::$words[$word] = mb_strtoupper(mb_substr(static::$words[$word], 0, 1)).mb_substr(static::$words[$word],1);
 			
-		return $this->words[$word];
+		return static::$words[$word];
 	}	
 	
 	function faq_tree():array
