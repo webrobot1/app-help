@@ -7,9 +7,9 @@ class TranslateModel extends \Edisom\Core\Model
 		$where = array();	
 		
 		if(
-			($count = $this->query('SELECT COUNT(*) as count FROM translate '.($where?' WHERE '.implode(' AND ', $where):''))[0]['count'])
+			($count = $this->query('SELECT COUNT(*) as count FROM translate '.($callback?' WHERE '.static::explode($callback, ' AND '):''))[0]['count'])
 				&&
-			($data = $this->query('SELECT * FROM translate '.($where?' WHERE '.implode(' AND ', $where):'').($callback['sort']?' ORDER BY '.$callback['sort'].' '.($callback['order']?'ASC':'DESC'):'').' LIMIT '.((int)$callback['page']*100).', 100'))
+			($data = $this->query('SELECT * FROM translate '.($callback?' WHERE '.static::explode($callback, ' AND '):'')))
 		){
 			
 			
